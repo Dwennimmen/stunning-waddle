@@ -1,0 +1,13 @@
+2022-07-10 08:54:58 [SEVERE] de.uk.java.feader.gui.FeaderGUI <init>(): IFeaderSearchEngine param is null!
+2022-12-01 14:35:36 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 15:41:03 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 18:32:12 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 18:32:58 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 18:35:37 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 18:35:58 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 18:38:09 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 18:39:18 [SEVERE] de.uk.java.feader.io.FeedDownloader readFeed(): Error reading stream for: http://www.tagesschau.de/xml/rss2
+2022-12-01 18:39:35 [WARNING] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.ccc.de/rss/updates.rdf'. Maybe this feed is already subscribed?
+2022-12-01 18:39:35 [WARNING] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.theonion.com/rss'. Maybe this feed is already subscribed?
+2022-12-01 18:39:35 [WARNING] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://xkcd.com/rss.xml'. Maybe this feed is already subscribed?
+2022-12-01 18:39:35 [WARNING] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.ub.uni-koeln.de/rss'. Maybe this feed is already subscribed?
