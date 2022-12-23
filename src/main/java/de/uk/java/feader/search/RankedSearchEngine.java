@@ -23,11 +23,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RankedSearchEngine implements IRankedSearchEngine {
-    public static void main(String[] args) {
-        RankedSearchEngine rs = new RankedSearchEngine();
-        System.out.println(rs.search("Tests"));
-    }
-
     private boolean caseSensitiveCheck;
     ITokenizer tokenizer;
     HashMap<String, Map<Entry, Integer>> index = new HashMap<String, Map<Entry, Integer>>();
@@ -53,22 +48,15 @@ public class RankedSearchEngine implements IRankedSearchEngine {
                     key = k;
                     check = true;
                     result.putAll(index.get(key));
-                    try {
-                        result.putAll(index.get(searchTerm));
-                    }
-                    catch (Exception e) {
-                        // TODO: handle exception
-
-                    }
                 }
             }
         }
         if(check) {
             if (index.get(key).isEmpty())
                 return new ArrayList<Entry>();
-//			sorting entries in descending
+//			sorting entries in descending order
             List<Map.Entry<Entry, Integer> > list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
-            Collections.sort(list, (i1, i2) -> i2.getValue().compareTo(i1.getValue()));
+            Collections.sort(list, (item1, item2) -> item2.getValue().compareTo(item1.getValue()));
             ArrayList<Entry> entryList = new ArrayList<Entry>();
             for(Map.Entry<Entry, Integer> e : list) {
                 entryList.add(e.getKey());
