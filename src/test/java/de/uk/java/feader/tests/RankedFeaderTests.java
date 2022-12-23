@@ -12,6 +12,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -107,7 +109,16 @@ public class RankedFeaderTests {
 		assertEquals("search results not in correct order", "Test Title 3", SEARCH.search("word").get(0).getTitle());
 		assertEquals("search results not in correct order", "Test Title 2", SEARCH.search("word").get(1).getTitle());
 	}
-
+	@Test
+	public void testWildCard(){
+		String word = "ga umlage".toLowerCase();
+		String searchTerm = "gas*";
+		boolean result = word.matches(searchTerm.replaceAll("\\*", ".*"));
+		Pattern pattern = Pattern.compile(searchTerm, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(word);
+		boolean matchFound = matcher.find();
+		assertTrue(matchFound);
+	}
 	
 
 }

@@ -27,10 +27,38 @@ public class RankedSearchEngine implements IRankedSearchEngine {
     ITokenizer tokenizer;
     HashMap<String, Map<Entry, Integer>> index = new HashMap<String, Map<Entry, Integer>>();
 
+    /**
+     * Is revoked if searchterm contains a U+002A Asterisk Sign (*). Searches the search index for
+     * any word by replacing the Asterisk (*) with the regex ".*" that matches the previous token
+     * between zero and unlimited times. The method returns a
+     * Set of Entries that contain matching words.
+     * @param wildcard The searchterm String containing a "*" (U+002A)
+     * @return A Set of search results (Entry instances)
+     */
+    public List<Entry> wildcardSearch(String wildcard) {
+        Set<String> words = index.keySet();
+        HashMap<Entry, Integer> result = new HashMap<Entry, Integer>();
+        for (String word : words) {
+            if (word.matches(wildcard.replaceAll("\\*", ".*"))) {
+                result.putAll(index.get(word));
+            }
+        }
+        List<Map.Entry<Entry, Integer> > list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
+        Collections.sort(list, (item1, item2) -> item2.getValue().compareTo(item1.getValue()));
+        ArrayList<Entry> entryList = new ArrayList<Entry>();
+        for(Map.Entry<Entry, Integer> e : list) {
+            entryList.add(e.getKey());
+        }
+        return entryList;
+
+    }
     @Override
     public List<Entry> search(String searchTerm) {
         if (index.isEmpty())
             return null;
+        if (searchTerm.contains("*")) {
+            return new ArrayList<>(wildcardSearch(searchTerm));
+        }
 
         boolean check = false;
         String key = "";
@@ -61,10 +89,8 @@ public class RankedSearchEngine implements IRankedSearchEngine {
             for(Map.Entry<Entry, Integer> e : list) {
                 entryList.add(e.getKey());
             }
-
             return entryList;
-        }
-        else {
+        } else {
             return new ArrayList<Entry>();
         }
     }
