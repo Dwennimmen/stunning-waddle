@@ -1,5 +1,6 @@
 package de.uk.java.feader.tests;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -10,6 +11,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -214,6 +217,6 @@ public class FeaderTests {
 			fail("Tokenizer doesn't produce the expected results.");
 		}
 	}
-	
+
 
 }

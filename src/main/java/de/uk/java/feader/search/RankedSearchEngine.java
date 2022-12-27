@@ -4,23 +4,8 @@ import de.uk.java.feader.data.Entry;
 import de.uk.java.feader.data.Feed;
 import de.uk.java.feader.utils.ITokenizer;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.io.*;
+import java.util.*;
 
 public class RankedSearchEngine implements IRankedSearchEngine {
     private boolean caseSensitiveCheck;
@@ -44,7 +29,7 @@ public class RankedSearchEngine implements IRankedSearchEngine {
             }
         }
         List<Map.Entry<Entry, Integer> > list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
-        Collections.sort(list, (item1, item2) -> item2.getValue().compareTo(item1.getValue()));
+        list.sort((item1, item2) -> item2.getValue().compareTo(item1.getValue()));
         ArrayList<Entry> entryList = new ArrayList<Entry>();
         for(Map.Entry<Entry, Integer> e : list) {
             entryList.add(e.getKey());
@@ -84,7 +69,7 @@ public class RankedSearchEngine implements IRankedSearchEngine {
                 return new ArrayList<Entry>();
 //			sorting entries in descending order
             List<Map.Entry<Entry, Integer> > list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
-            Collections.sort(list, (item1, item2) -> item2.getValue().compareTo(item1.getValue()));
+            list.sort((item1, item2) -> item2.getValue().compareTo(item1.getValue()));
             ArrayList<Entry> entryList = new ArrayList<Entry>();
             for(Map.Entry<Entry, Integer> e : list) {
                 entryList.add(e.getKey());
@@ -115,8 +100,8 @@ public class RankedSearchEngine implements IRankedSearchEngine {
 
             for (String token : tokens) {
                 int count = 0;
-                for(int i = 0; i<text.length; i++) {
-                    if(token.equals(text[i])) {
+                for (String s : text) {
+                    if (token.equals(s)) {
                         count++;
                     }
                 }
