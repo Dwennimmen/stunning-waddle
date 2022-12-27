@@ -4,40 +4,25 @@ import de.uk.java.feader.data.Entry;
 import de.uk.java.feader.data.Feed;
 import de.uk.java.feader.utils.ITokenizer;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.io.*;
+import java.util.*;
 
 public class RankedSearchEngine implements IRankedSearchEngine {
     private boolean caseSensitiveCheck;
     ITokenizer tokenizer;
-    HashMap<String, Map<Entry, Integer>> index = new HashMap<String, Map<Entry, Integer>>();
+    HashMap<String, Map<Entry, Integer>> index = new HashMap<>();
 
     @Override
     public List<Entry> search(String searchTerm) {
         if (index.isEmpty())
             return null;
 
-        boolean check = false;
+        boolean isChecked = false;
         String key = "";
-        HashMap<Entry, Integer> result = new HashMap<Entry, Integer>();
+        HashMap<Entry, Integer> result = new HashMap<>();
         if(this.isCaseSensitive()) {
             if(index.containsKey(searchTerm)) {
-                check = true;
+                isChecked = true;
                 key = searchTerm;
                 result.putAll(index.get(key));
             }
@@ -46,12 +31,12 @@ public class RankedSearchEngine implements IRankedSearchEngine {
             for(String k : index.keySet()) {
                 if(searchTerm.equalsIgnoreCase(k)) {
                     key = k;
-                    check = true;
+                    isChecked = true;
                     result.putAll(index.get(key));
                 }
             }
         }
-        if(check) {
+        if(isChecked) {
             if (index.get(key).isEmpty())
                 return new ArrayList<Entry>();
 //			sorting entries in descending order
@@ -89,8 +74,8 @@ public class RankedSearchEngine implements IRankedSearchEngine {
 
             for (String token : tokens) {
                 int count = 0;
-                for(int i = 0; i<text.length; i++) {
-                    if(token.equals(text[i])) {
+                for (String s : text) {
+                    if (token.equals(s)) {
                         count++;
                     }
                 }
