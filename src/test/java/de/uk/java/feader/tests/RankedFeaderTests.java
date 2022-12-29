@@ -89,10 +89,10 @@ public class RankedFeaderTests {
 
 		SEARCH.setCaseSensitive(false);
 		assertEquals("search not case insensitive", 4, SEARCH.search("feader").size());		
-		assertEquals("search not case insensitive", 4, SEARCH.search("Tests").size());		
+		assertEquals("search not case insensitive", 4, SEARCH.search("Tests").size());
 		SEARCH.setCaseSensitive(true);
 		assertEquals("search not case sensitive", 0, SEARCH.search("feader").size());		
-		assertEquals("search not case insensitive", 1, SEARCH.search("Tests").size());		
+		assertEquals("search not case insensitive", 1, SEARCH.search("Tests").size());
 
 	}
 
@@ -103,21 +103,11 @@ public class RankedFeaderTests {
 		SEARCH.setCaseSensitive(false);
 
 		assertTrue("Search engine does not implement IRankedSearchEngine", SEARCH instanceof IRankedSearchEngine);
-		
+
 		assertEquals("wrong number of search results!", 4, SEARCH.search("Feader").size());
 		assertEquals("wrong number of search results!", 2, SEARCH.search("word").size());
 		assertEquals("search results not in correct order", "Test Title 3", SEARCH.search("word").get(0).getTitle());
 		assertEquals("search results not in correct order", "Test Title 2", SEARCH.search("word").get(1).getTitle());
-	}
-	@Test
-	public void testWildCard(){
-		String word = "ga umlage".toLowerCase();
-		String searchTerm = "gas*";
-		boolean result = word.matches(searchTerm.replaceAll("\\*", ".*"));
-		Pattern pattern = Pattern.compile(searchTerm, Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(word);
-		boolean matchFound = matcher.find();
-		assertTrue(matchFound);
 	}
 	
 

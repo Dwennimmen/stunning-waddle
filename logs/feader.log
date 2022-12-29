@@ -11,3 +11,8 @@
 2022-12-01 18:39:35 [WARNING] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.theonion.com/rss'. Maybe this feed is already subscribed?
 2022-12-01 18:39:35 [WARNING] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://xkcd.com/rss.xml'. Maybe this feed is already subscribed?
 2022-12-01 18:39:35 [WARNING] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.ub.uni-koeln.de/rss'. Maybe this feed is already subscribed?
+2022-12-29 14:03:21 [WARNUNG] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.tagesschau.de/xml/rss2/'. Maybe this feed is already subscribed?
+2022-12-29 14:03:21 [WARNUNG] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.ccc.de/rss/updates.rdf'. Maybe this feed is already subscribed?
+2022-12-29 14:03:21 [WARNUNG] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.theonion.com/rss'. Maybe this feed is already subscribed?
+2022-12-29 14:03:21 [WARNUNG] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://xkcd.com/rss.xml'. Maybe this feed is already subscribed?
+2022-12-29 14:03:21 [WARNUNG] de.uk.java.feader.gui.FeaderGUI addFeed(): Cannot add 'https://www.ub.uni-koeln.de/rss'. Maybe this feed is already subscribed?

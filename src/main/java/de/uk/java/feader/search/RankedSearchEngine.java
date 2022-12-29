@@ -17,26 +17,50 @@ public class RankedSearchEngine implements IRankedSearchEngine {
      * any word by replacing the Asterisk (*) with the regex ".*" that matches the previous token
      * between zero and unlimited times. The method returns a
      * Set of Entries that contain matching words.
+     *
      * @param wildcard The searchterm String containing a "*" (U+002A)
      * @return A Set of search results (Entry instances)
      */
+//    @Override
     public List<Entry> wildcardSearch(String wildcard) {
         Set<String> words = index.keySet();
         HashMap<Entry, Integer> result = new HashMap<Entry, Integer>();
+        boolean check = false;
+        String key = "";
+        String term = wildcard.replaceAll("\\*", ".*");
         for (String word : words) {
-            if (word.matches(wildcard.replaceAll("\\*", ".*"))) {
-                result.putAll(index.get(word));
+            if (this.isCaseSensitive()) {
+                if (word.matches(term)) {
+                    check = true;
+                    key = word;
+                    result.putAll(index.get(key));
+                }
+            } else {
+                    if (word.equalsIgnoreCase(term)) {
+                        key = word;
+                        check = true;
+                        result.putAll(index.get(key));
+                    }
+                }
             }
+
+        if (check) {
+            if (index.get(key).isEmpty())
+                return new ArrayList<Entry>();
+//			sorting entries in descending order
+            List<Map.Entry<Entry, Integer>> list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
+            list.sort((item1, item2) -> item2.getValue().compareTo(item1.getValue()));
+            ArrayList<Entry> entryList = new ArrayList<Entry>();
+            for (Map.Entry<Entry, Integer> e : list) {
+                entryList.add(e.getKey());
+            }
+            return entryList;
+        } else {
+            return new ArrayList<Entry>();
         }
-        List<Map.Entry<Entry, Integer> > list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
-        list.sort((item1, item2) -> item2.getValue().compareTo(item1.getValue()));
-        ArrayList<Entry> entryList = new ArrayList<Entry>();
-        for(Map.Entry<Entry, Integer> e : list) {
-            entryList.add(e.getKey());
-        }
-        return entryList;
 
     }
+
     @Override
     public List<Entry> search(String searchTerm) {
         if (index.isEmpty())
@@ -48,30 +72,29 @@ public class RankedSearchEngine implements IRankedSearchEngine {
         boolean check = false;
         String key = "";
         HashMap<Entry, Integer> result = new HashMap<Entry, Integer>();
-        if(this.isCaseSensitive()) {
-            if(index.containsKey(searchTerm)) {
+        if (this.isCaseSensitive()) {
+            if (index.containsKey(searchTerm)) {
                 check = true;
                 key = searchTerm;
                 result.putAll(index.get(key));
             }
-        }
-        else {
-            for(String k : index.keySet()) {
-                if(searchTerm.equalsIgnoreCase(k)) {
+        } else {
+            for (String k : index.keySet()) {
+                if (searchTerm.equalsIgnoreCase(k)) {
                     key = k;
                     check = true;
                     result.putAll(index.get(key));
                 }
             }
         }
-        if(check) {
+        if (check) {
             if (index.get(key).isEmpty())
                 return new ArrayList<Entry>();
 //			sorting entries in descending order
-            List<Map.Entry<Entry, Integer> > list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
+            List<Map.Entry<Entry, Integer>> list = new LinkedList<Map.Entry<Entry, Integer>>(result.entrySet());
             list.sort((item1, item2) -> item2.getValue().compareTo(item1.getValue()));
             ArrayList<Entry> entryList = new ArrayList<Entry>();
-            for(Map.Entry<Entry, Integer> e : list) {
+            for (Map.Entry<Entry, Integer> e : list) {
                 entryList.add(e.getKey());
             }
             return entryList;
@@ -160,6 +183,7 @@ public class RankedSearchEngine implements IRankedSearchEngine {
     public void setCaseSensitive(boolean cs) {
         this.caseSensitiveCheck = cs;
     }
+
     @Override
     public boolean isCaseSensitive() {
         return this.caseSensitiveCheck;
